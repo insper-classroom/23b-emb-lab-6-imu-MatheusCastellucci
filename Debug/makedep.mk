@@ -4,6 +4,8 @@
 
 src\ASF\common\services\delay\sam\cycle_counter.c
 
+src\Fusion\FusionAhrs.c
+
 src\Fusion\FusionCompass.c
 
 src\Fusion\FusionOffset.c
