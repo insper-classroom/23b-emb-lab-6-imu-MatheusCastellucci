@@ -130,23 +130,20 @@ static void task_imu(void *pvParameters) {
 	if(rtn != TWIHS_SUCCESS)
 		printf("[ERRO] [i2c] [write] \n");
 
-	int16_t  raw_acc_x, raw_acc_y, raw_acc_z;
-	volatile uint8_t  raw_acc_xHigh, raw_acc_yHigh, raw_acc_zHigh;
-	volatile uint8_t  raw_acc_xLow,  raw_acc_yLow,  raw_acc_zLow;
-	float proc_acc_x, proc_acc_y, proc_acc_z;
-
-	int16_t  raw_gyr_x, raw_gyr_y, raw_gyr_z;
-	volatile uint8_t  raw_gyr_xHigh, raw_gyr_yHigh, raw_gyr_zHigh;
-	volatile uint8_t  raw_gyr_xLow,  raw_gyr_yLow,  raw_gyr_zLow;
-	float proc_gyr_x, proc_gyr_y, proc_gyr_z;
-	float acc;
 	FusionAhrs ahrs;
 	FusionAhrsInitialise(&ahrs); 
-	float delta_angle_roll;
-	float delta_angle_pitch;
-	float delta_angle_yaw;
 
 	for (;;) {
+		int16_t  raw_acc_x, raw_acc_y, raw_acc_z;
+		volatile uint8_t  raw_acc_xHigh, raw_acc_yHigh, raw_acc_zHigh;
+		volatile uint8_t  raw_acc_xLow,  raw_acc_yLow,  raw_acc_zLow;
+		float proc_acc_x, proc_acc_y, proc_acc_z;
+
+		int16_t  raw_gyr_x, raw_gyr_y, raw_gyr_z;
+		volatile uint8_t  raw_gyr_xHigh, raw_gyr_yHigh, raw_gyr_zHigh;
+		volatile uint8_t  raw_gyr_xLow,  raw_gyr_yLow,  raw_gyr_zLow;
+		float proc_gyr_x, proc_gyr_y, proc_gyr_z;
+		float acc;
 		// Le valor do acc X High e Low
 		mcu6050_i2c_bus_read(MPU6050_DEFAULT_ADDRESS, MPU6050_RA_ACCEL_XOUT_H, &raw_acc_xHigh, 1);
 		mcu6050_i2c_bus_read(MPU6050_DEFAULT_ADDRESS, MPU6050_RA_ACCEL_XOUT_L, &raw_acc_xLow,  1);
