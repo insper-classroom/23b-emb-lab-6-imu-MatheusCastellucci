@@ -19,23 +19,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   7 .comment      00000059  00000000  00000000  000209ee  2**0
                   CONTENTS, READONLY
-  8 .debug_info   000223ba  00000000  00000000  00020a47  2**0
+  8 .debug_info   00022399  00000000  00000000  00020a47  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_abbrev 0000480c  00000000  00000000  00042e01  2**0
+  9 .debug_abbrev 0000480c  00000000  00000000  00042de0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    0000f108  00000000  00000000  0004760d  2**0
+ 10 .debug_loc    0000f108  00000000  00000000  000475ec  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_aranges 00001010  00000000  00000000  00056715  2**0
+ 11 .debug_aranges 00001010  00000000  00000000  000566f4  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000015e8  00000000  00000000  00057725  2**0
+ 12 .debug_ranges 000015e8  00000000  00000000  00057704  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_macro  0000bf5a  00000000  00000000  00058d0d  2**0
+ 13 .debug_macro  0000bf5a  00000000  00000000  00058cec  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_line   00011ae6  00000000  00000000  00064c67  2**0
+ 14 .debug_line   00011ae5  00000000  00000000  00064c46  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_str    000a1330  00000000  00000000  0007674d  2**0
+ 15 .debug_str    000a1308  00000000  00000000  0007672b  2**0
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_frame  00003a24  00000000  00000000  00117a80  2**2
+ 16 .debug_frame  00003a24  00000000  00000000  00117a34  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -8212,7 +8212,7 @@ static void task_imu(void *pvParameters) {
 	if(rtn != TWIHS_SUCCESS)
   403894:	b9f8      	cbnz	r0, 4038d6 <task_imu+0xb2>
 	FusionAhrsInitialise(&ahrs); 
-  403896:	a80c      	add	r0, sp, #48	; 0x30
+  403896:	a80f      	add	r0, sp, #60	; 0x3c
   403898:	4b25      	ldr	r3, [pc, #148]	; (403930 <task_imu+0x10c>)
   40389a:	4798      	blx	r3
 		mcu6050_i2c_bus_read(MPU6050_DEFAULT_ADDRESS, MPU6050_RA_ACCEL_XOUT_H, &raw_acc_xHigh, 1);
@@ -8303,13 +8303,13 @@ static inline FusionEuler FusionQuaternionToEuler(const FusionQuaternion quatern
   403960:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
   403964:	f140 8125 	bpl.w	403bb2 <task_imu+0x38e>
 			orient = FRENTE;
-  403968:	f88d 4013 	strb.w	r4, [sp, #19]
+  403968:	f88d 401f 	strb.w	r4, [sp, #31]
 		BaseType_t xHigherPriorityTaskWoken = pdTRUE;
   40396c:	aa32      	add	r2, sp, #200	; 0xc8
-  40396e:	f842 4db4 	str.w	r4, [r2, #-180]!
+  40396e:	f842 4da8 	str.w	r4, [r2, #-168]!
 		xQueueSend(xQueueOrientacao, (void *)&orient, &xHigherPriorityTaskWoken);
   403972:	2300      	movs	r3, #0
-  403974:	f10d 0113 	add.w	r1, sp, #19
+  403974:	f10d 011f 	add.w	r1, sp, #31
   403978:	4890      	ldr	r0, [pc, #576]	; (403bbc <task_imu+0x398>)
   40397a:	6800      	ldr	r0, [r0, #0]
   40397c:	47c0      	blx	r8
@@ -8319,104 +8319,104 @@ static inline FusionEuler FusionQuaternionToEuler(const FusionQuaternion quatern
   403982:	4798      	blx	r3
 		mcu6050_i2c_bus_read(MPU6050_DEFAULT_ADDRESS, MPU6050_RA_ACCEL_XOUT_H, &raw_acc_xHigh, 1);
   403984:	4623      	mov	r3, r4
-  403986:	f10d 029f 	add.w	r2, sp, #159	; 0x9f
+  403986:	f10d 0213 	add.w	r2, sp, #19
   40398a:	213b      	movs	r1, #59	; 0x3b
   40398c:	4630      	mov	r0, r6
   40398e:	4d8d      	ldr	r5, [pc, #564]	; (403bc4 <task_imu+0x3a0>)
   403990:	47a8      	blx	r5
 		mcu6050_i2c_bus_read(MPU6050_DEFAULT_ADDRESS, MPU6050_RA_ACCEL_XOUT_L, &raw_acc_xLow,  1);
   403992:	4623      	mov	r3, r4
-  403994:	aa27      	add	r2, sp, #156	; 0x9c
-  403996:	213c      	movs	r1, #60	; 0x3c
-  403998:	4630      	mov	r0, r6
-  40399a:	47a8      	blx	r5
+  403994:	f10d 0216 	add.w	r2, sp, #22
+  403998:	213c      	movs	r1, #60	; 0x3c
+  40399a:	4630      	mov	r0, r6
+  40399c:	47a8      	blx	r5
 		mcu6050_i2c_bus_read(MPU6050_DEFAULT_ADDRESS, MPU6050_RA_ACCEL_YOUT_H, &raw_acc_yHigh, 1);
-  40399c:	4623      	mov	r3, r4
-  40399e:	f10d 029e 	add.w	r2, sp, #158	; 0x9e
+  40399e:	4623      	mov	r3, r4
+  4039a0:	aa05      	add	r2, sp, #20
   4039a2:	213d      	movs	r1, #61	; 0x3d
   4039a4:	4630      	mov	r0, r6
   4039a6:	47a8      	blx	r5
 		mcu6050_i2c_bus_read(MPU6050_DEFAULT_ADDRESS, MPU6050_RA_ACCEL_ZOUT_L, &raw_acc_yLow,  1);
   4039a8:	4623      	mov	r3, r4
-  4039aa:	f10d 029b 	add.w	r2, sp, #155	; 0x9b
+  4039aa:	f10d 0217 	add.w	r2, sp, #23
   4039ae:	2140      	movs	r1, #64	; 0x40
   4039b0:	4630      	mov	r0, r6
   4039b2:	47a8      	blx	r5
 		mcu6050_i2c_bus_read(MPU6050_DEFAULT_ADDRESS, MPU6050_RA_ACCEL_ZOUT_H, &raw_acc_zHigh, 1);
   4039b4:	4623      	mov	r3, r4
-  4039b6:	f10d 029d 	add.w	r2, sp, #157	; 0x9d
+  4039b6:	f10d 0215 	add.w	r2, sp, #21
   4039ba:	213f      	movs	r1, #63	; 0x3f
   4039bc:	4630      	mov	r0, r6
   4039be:	47a8      	blx	r5
 		mcu6050_i2c_bus_read(MPU6050_DEFAULT_ADDRESS, MPU6050_RA_ACCEL_ZOUT_L, &raw_acc_zLow,  1);
   4039c0:	4623      	mov	r3, r4
-  4039c2:	f10d 029a 	add.w	r2, sp, #154	; 0x9a
-  4039c6:	2140      	movs	r1, #64	; 0x40
-  4039c8:	4630      	mov	r0, r6
-  4039ca:	47a8      	blx	r5
+  4039c2:	aa06      	add	r2, sp, #24
+  4039c4:	2140      	movs	r1, #64	; 0x40
+  4039c6:	4630      	mov	r0, r6
+  4039c8:	47a8      	blx	r5
 		raw_acc_x = (raw_acc_xHigh << 8) | (raw_acc_xLow << 0);
-  4039cc:	f89d 209f 	ldrb.w	r2, [sp, #159]	; 0x9f
-  4039d0:	f89d 309c 	ldrb.w	r3, [sp, #156]	; 0x9c
-  4039d4:	ea43 2302 	orr.w	r3, r3, r2, lsl #8
-  4039d8:	b21b      	sxth	r3, r3
-  4039da:	ee0a 3a10 	vmov	s20, r3
+  4039ca:	f89d 2013 	ldrb.w	r2, [sp, #19]
+  4039ce:	f89d 3016 	ldrb.w	r3, [sp, #22]
+  4039d2:	ea43 2302 	orr.w	r3, r3, r2, lsl #8
+  4039d6:	b21b      	sxth	r3, r3
+  4039d8:	ee0a 3a10 	vmov	s20, r3
 		raw_acc_y = (raw_acc_yHigh << 8) | (raw_acc_yLow << 0);
-  4039de:	f89d 209e 	ldrb.w	r2, [sp, #158]	; 0x9e
-  4039e2:	f89d 309b 	ldrb.w	r3, [sp, #155]	; 0x9b
-  4039e6:	ea43 2302 	orr.w	r3, r3, r2, lsl #8
-  4039ea:	b21b      	sxth	r3, r3
-  4039ec:	ee08 3a90 	vmov	s17, r3
+  4039dc:	f89d 2014 	ldrb.w	r2, [sp, #20]
+  4039e0:	f89d 3017 	ldrb.w	r3, [sp, #23]
+  4039e4:	ea43 2302 	orr.w	r3, r3, r2, lsl #8
+  4039e8:	b21b      	sxth	r3, r3
+  4039ea:	ee08 3a90 	vmov	s17, r3
 		raw_acc_z = (raw_acc_zHigh << 8) | (raw_acc_zLow << 0);
-  4039f0:	f89d 209d 	ldrb.w	r2, [sp, #157]	; 0x9d
-  4039f4:	f89d 309a 	ldrb.w	r3, [sp, #154]	; 0x9a
-  4039f8:	ea43 2302 	orr.w	r3, r3, r2, lsl #8
-  4039fc:	b21b      	sxth	r3, r3
-  4039fe:	ee08 3a10 	vmov	s16, r3
+  4039ee:	f89d 2015 	ldrb.w	r2, [sp, #21]
+  4039f2:	f89d 3018 	ldrb.w	r3, [sp, #24]
+  4039f6:	ea43 2302 	orr.w	r3, r3, r2, lsl #8
+  4039fa:	b21b      	sxth	r3, r3
+  4039fc:	ee08 3a10 	vmov	s16, r3
 		mcu6050_i2c_bus_read(MPU6050_DEFAULT_ADDRESS, MPU6050_RA_GYRO_XOUT_H, &raw_gyr_xHigh, 1);
-  403a02:	4623      	mov	r3, r4
-  403a04:	f10d 0299 	add.w	r2, sp, #153	; 0x99
-  403a08:	2143      	movs	r1, #67	; 0x43
-  403a0a:	4630      	mov	r0, r6
-  403a0c:	47a8      	blx	r5
+  403a00:	4623      	mov	r3, r4
+  403a02:	f10d 0219 	add.w	r2, sp, #25
+  403a06:	2143      	movs	r1, #67	; 0x43
+  403a08:	4630      	mov	r0, r6
+  403a0a:	47a8      	blx	r5
 		mcu6050_i2c_bus_read(MPU6050_DEFAULT_ADDRESS, MPU6050_RA_GYRO_XOUT_L, &raw_gyr_xLow,  1);
-  403a0e:	4623      	mov	r3, r4
-  403a10:	f10d 0296 	add.w	r2, sp, #150	; 0x96
-  403a14:	2144      	movs	r1, #68	; 0x44
-  403a16:	4630      	mov	r0, r6
-  403a18:	47a8      	blx	r5
+  403a0c:	4623      	mov	r3, r4
+  403a0e:	aa07      	add	r2, sp, #28
+  403a10:	2144      	movs	r1, #68	; 0x44
+  403a12:	4630      	mov	r0, r6
+  403a14:	47a8      	blx	r5
 		mcu6050_i2c_bus_read(MPU6050_DEFAULT_ADDRESS, MPU6050_RA_GYRO_YOUT_H, &raw_gyr_yHigh, 1);
-  403a1a:	4623      	mov	r3, r4
-  403a1c:	aa26      	add	r2, sp, #152	; 0x98
-  403a1e:	2145      	movs	r1, #69	; 0x45
-  403a20:	4630      	mov	r0, r6
-  403a22:	47a8      	blx	r5
+  403a16:	4623      	mov	r3, r4
+  403a18:	f10d 021a 	add.w	r2, sp, #26
+  403a1c:	2145      	movs	r1, #69	; 0x45
+  403a1e:	4630      	mov	r0, r6
+  403a20:	47a8      	blx	r5
 		mcu6050_i2c_bus_read(MPU6050_DEFAULT_ADDRESS, MPU6050_RA_GYRO_ZOUT_L, &raw_gyr_yLow,  1);
-  403a24:	4623      	mov	r3, r4
-  403a26:	f10d 0295 	add.w	r2, sp, #149	; 0x95
-  403a2a:	2148      	movs	r1, #72	; 0x48
-  403a2c:	4630      	mov	r0, r6
-  403a2e:	47a8      	blx	r5
+  403a22:	4623      	mov	r3, r4
+  403a24:	f10d 021d 	add.w	r2, sp, #29
+  403a28:	2148      	movs	r1, #72	; 0x48
+  403a2a:	4630      	mov	r0, r6
+  403a2c:	47a8      	blx	r5
 		mcu6050_i2c_bus_read(MPU6050_DEFAULT_ADDRESS, MPU6050_RA_GYRO_ZOUT_H, &raw_gyr_zHigh, 1);
-  403a30:	4623      	mov	r3, r4
-  403a32:	f10d 0297 	add.w	r2, sp, #151	; 0x97
-  403a36:	2147      	movs	r1, #71	; 0x47
-  403a38:	4630      	mov	r0, r6
-  403a3a:	47a8      	blx	r5
+  403a2e:	4623      	mov	r3, r4
+  403a30:	f10d 021b 	add.w	r2, sp, #27
+  403a34:	2147      	movs	r1, #71	; 0x47
+  403a36:	4630      	mov	r0, r6
+  403a38:	47a8      	blx	r5
 		mcu6050_i2c_bus_read(MPU6050_DEFAULT_ADDRESS, MPU6050_RA_GYRO_ZOUT_L, &raw_gyr_zLow,  1);
-  403a3c:	4623      	mov	r3, r4
-  403a3e:	aa25      	add	r2, sp, #148	; 0x94
+  403a3a:	4623      	mov	r3, r4
+  403a3c:	f10d 021e 	add.w	r2, sp, #30
   403a40:	2148      	movs	r1, #72	; 0x48
   403a42:	4630      	mov	r0, r6
   403a44:	47a8      	blx	r5
 		raw_gyr_x = (raw_gyr_xHigh << 8) | (raw_gyr_xLow << 0);
-  403a46:	f89d e099 	ldrb.w	lr, [sp, #153]	; 0x99
-  403a4a:	f89d 1096 	ldrb.w	r1, [sp, #150]	; 0x96
+  403a46:	f89d e019 	ldrb.w	lr, [sp, #25]
+  403a4a:	f89d 101c 	ldrb.w	r1, [sp, #28]
 		raw_gyr_y = (raw_gyr_yHigh << 8) | (raw_gyr_yLow << 0);
-  403a4e:	f89d 5098 	ldrb.w	r5, [sp, #152]	; 0x98
-  403a52:	f89d 2095 	ldrb.w	r2, [sp, #149]	; 0x95
+  403a4e:	f89d 501a 	ldrb.w	r5, [sp, #26]
+  403a52:	f89d 201d 	ldrb.w	r2, [sp, #29]
 		raw_gyr_z = (raw_gyr_zHigh << 8) | (raw_gyr_zLow << 0);
-  403a56:	f89d 0097 	ldrb.w	r0, [sp, #151]	; 0x97
-  403a5a:	f89d 3094 	ldrb.w	r3, [sp, #148]	; 0x94
+  403a56:	f89d 001b 	ldrb.w	r0, [sp, #27]
+  403a5a:	f89d 301e 	ldrb.w	r3, [sp, #30]
 		proc_acc_x = (float)raw_acc_x/16384;
   403a5e:	eeb8 aaca 	vcvt.f32.s32	s20, s20
   403a62:	ee2a aa29 	vmul.f32	s20, s20, s19
@@ -8459,26 +8459,26 @@ static inline FusionEuler FusionQuaternionToEuler(const FusionQuaternion quatern
   403ac8:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
   403acc:	f73f af07 	bgt.w	4038de <task_imu+0xba>
 		const FusionVector gyroscope = {proc_gyr_x, proc_gyr_y, proc_gyr_z}; 
-  403ad0:	edcd ba06 	vstr	s23, [sp, #24]
-  403ad4:	ed8d ba07 	vstr	s22, [sp, #28]
-  403ad8:	edcd aa08 	vstr	s21, [sp, #32]
+  403ad0:	edcd ba09 	vstr	s23, [sp, #36]	; 0x24
+  403ad4:	ed8d ba0a 	vstr	s22, [sp, #40]	; 0x28
+  403ad8:	edcd aa0b 	vstr	s21, [sp, #44]	; 0x2c
 		const FusionVector accelerometer = {proc_acc_x, proc_acc_y, proc_acc_z};
-  403adc:	ed8d aa09 	vstr	s20, [sp, #36]	; 0x24
-  403ae0:	edcd 8a0a 	vstr	s17, [sp, #40]	; 0x28
-  403ae4:	ed8d 8a0b 	vstr	s16, [sp, #44]	; 0x2c
+  403adc:	ed8d aa0c 	vstr	s20, [sp, #48]	; 0x30
+  403ae0:	edcd 8a0d 	vstr	s17, [sp, #52]	; 0x34
+  403ae4:	ed8d 8a0e 	vstr	s16, [sp, #56]	; 0x38
 		FusionAhrsUpdateNoMagnetometer(&ahrs, gyroscope, accelerometer, dT);
   403ae8:	4b37      	ldr	r3, [pc, #220]	; (403bc8 <task_imu+0x3a4>)
   403aea:	9303      	str	r3, [sp, #12]
-  403aec:	ab09      	add	r3, sp, #36	; 0x24
+  403aec:	ab0c      	add	r3, sp, #48	; 0x30
   403aee:	e893 0007 	ldmia.w	r3, {r0, r1, r2}
   403af2:	e88d 0007 	stmia.w	sp, {r0, r1, r2}
-  403af6:	ab06      	add	r3, sp, #24
+  403af6:	ab09      	add	r3, sp, #36	; 0x24
   403af8:	cb0e      	ldmia	r3, {r1, r2, r3}
-  403afa:	a80c      	add	r0, sp, #48	; 0x30
+  403afa:	a80f      	add	r0, sp, #60	; 0x3c
   403afc:	4d33      	ldr	r5, [pc, #204]	; (403bcc <task_imu+0x3a8>)
   403afe:	47a8      	blx	r5
 		const FusionEuler euler = FusionQuaternionToEuler(FusionAhrsGetQuaternion(&ahrs));
-  403b00:	a90c      	add	r1, sp, #48	; 0x30
+  403b00:	a90f      	add	r1, sp, #60	; 0x3c
   403b02:	a82e      	add	r0, sp, #184	; 0xb8
   403b04:	4b32      	ldr	r3, [pc, #200]	; (403bd0 <task_imu+0x3ac>)
   403b06:	4798      	blx	r3
@@ -8534,11 +8534,11 @@ static inline FusionEuler FusionQuaternionToEuler(const FusionQuaternion quatern
   403ba6:	f57f aed7 	bpl.w	403958 <task_imu+0x134>
 			orient = DIREITA;
   403baa:	2302      	movs	r3, #2
-  403bac:	f88d 3013 	strb.w	r3, [sp, #19]
+  403bac:	f88d 301f 	strb.w	r3, [sp, #31]
   403bb0:	e6dc      	b.n	40396c <task_imu+0x148>
 			orient = ESQUERDA;
   403bb2:	2300      	movs	r3, #0
-  403bb4:	f88d 3013 	strb.w	r3, [sp, #19]
+  403bb4:	f88d 301f 	strb.w	r3, [sp, #31]
   403bb8:	e6d8      	b.n	40396c <task_imu+0x148>
   403bba:	bf00      	nop
   403bbc:	20400c1c 	.word	0x20400c1c
